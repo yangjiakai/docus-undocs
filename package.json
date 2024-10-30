@@ -1,0 +1,73 @@
+{
+  "name": "undocs",
+  "version": "0.2.30",
+  "repository": "unjs/undocs",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "undocs": "./cli/main.mjs"
+  },
+  "files": [
+    "app",
+    "cli",
+    "schema",
+    "!app/**/node_modules",
+    "!app/**/tsconfig.json"
+  ],
+  "scripts": {
+    "build": "true",
+    "dev": "bun run docs:dev",
+    "docs:build": "bun run undocs build docs",
+    "docs:dev": "NUXT_DOCS_DEV=1 bun run undocs dev docs",
+    "lint": "eslint --cache . && prettier -c app cli schema",
+    "lint:fix": "eslint --cache . --fix && prettier -c -w app cli schema",
+    "prepack": "bun run build",
+    "profile:0x": "bunx 0x -o cli/main.mjs dev docs",
+    "profile:0x-kernel": "bun run profile:0x --kernel-tracing",
+    "profile:cpu": "rm -rf .profile && node --cpu-prof --diagnostic-dir ../.profile bin/cli.mjs dev docs",
+    "release": "bun run lint && changelogen --release && npm publish && git push --follow-tags",
+    "template:dev": "bun run undocs dev template",
+    "undocs": "./cli/main.mjs"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@iconify-json/logos": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.9",
+    "@nuxt/content": "^2.13.4",
+    "@nuxt/fonts": "^0.10.2",
+    "@nuxt/ui-pro": "^1.4.4",
+    "@nuxtjs/plausible": "^1.0.3",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@resvg/resvg-wasm": "^2.6.2",
+    "automd": "^0.3.12",
+    "c12": "^2.0.1",
+    "citty": "^0.1.6",
+    "consola": "^3.2.3",
+    "defu": "^6.1.4",
+    "is-buffer": "^2.0.5",
+    "nitropack": "^2.9.7",
+    "nuxi": "^3.15.0",
+    "nuxt": "^3.13.2",
+    "nuxt-build-cache": "^0.1.1",
+    "pkg-types": "^1.2.1",
+    "scule": "^1.3.0",
+    "tailwindcss": "^3.4.14",
+    "unctx": "^2.3.1",
+    "unstorage": "^1.12.0",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@nuxt/eslint-config": "^0.6.0",
+    "@nuxt/image": "^1.8.1",
+    "@types/node": "^22.7.9",
+    "changelogen": "^0.5.7",
+    "eslint": "^9.13.0",
+    "eslint-config-unjs": "^0.4.1",
+    "jiti": "^2.3.3",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "vue-tsc": "^2.1.6"
+  },
+  "packageManager": "bun@1.1.30"
+}
